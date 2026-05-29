@@ -1,0 +1,67 @@
+{
+ "charts": [
+  {
+   "chart_name": "Students by Academic Year",
+   "label": "Students List"
+  },
+  {
+   "chart_name": "Total Instructor",
+   "label": "Total Instructor"
+  },
+  {
+   "chart_name": "Student Batch",
+   "label": "Student Batch"
+  },
+  {
+   "chart_name": "Course",
+   "label": "Course"
+  }
+ ],
+ "content": "[{\"id\":\"rI1VWJiDt1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Education Dashboard</span>\",\"col\":12}},{\"id\":\"GTex6266Fr\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Students List\",\"col\":6}},{\"id\":\"ymZXkVduOr\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Total Instructor\",\"col\":6}},{\"id\":\"PBfT8cA3C6\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Course\",\"col\":6}},{\"id\":\"sXG4DhnLcv\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Student Batch\",\"col\":6}},{\"id\":\"3dA-1P1UwV\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Events\",\"col\":6}},{\"id\":\"I_llVYvlGS\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Student\",\"col\":6}},{\"id\":\"-sVsYq0awj\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Student Batch Name\",\"col\":6}},{\"id\":\"1yMsBiFKdW\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Course\",\"col\":6}}]",
+ "creation": "2026-04-22 16:30:42.652552",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "table_2",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Education Dashboard",
+ "links": [],
+ "modified": "2026-05-20 16:46:01.403985",
+ "modified_by": "Administrator",
+ "module": "Education",
+ "name": "Education Dashboard",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "Education",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "Event",
+   "label": "Events",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Student",
+   "label": "Student",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Student Batch Name",
+   "label": "Student Batch Name",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Course",
+   "label": "Course",
+   "quick_list_filter": "[]"
+  }
+ ],
+ "roles": [],
+ "sequence_id": 4.0,
+ "shortcuts": [],
+ "title": "Education Dashboard"
+}
