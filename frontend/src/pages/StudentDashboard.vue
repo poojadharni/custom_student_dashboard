@@ -474,31 +474,31 @@ const dueFee = ref(0)
 /* ----------------------------------
    FETCH STUDENTS
 ---------------------------------- */
-// const fetchStudents = async () => {
-//     try {
-//         const res = await fetch(
-//             '/api/method/education_dashboard.api.student.get_recent_students'
-//         )
+const fetchStudents = async () => {
+    try {
+        const res = await fetch(
+            '/api/method/education_dashboard.api.student.get_recent_students'
+        )
 
-//         const data = await res.json()
+        const data = await res.json()
 
-//         if (data.message?.status === 'success') {
+        if (data.message?.status === 'success') {
 
-//             students.value = data.message.data
+            students.value = data.message.data
 
-//             if (students.value.length > 0) {
+            if (students.value.length > 0) {
 
-//                 selectedStudent.value = students.value[0].name
+                selectedStudent.value = students.value[0].name
 
-//                 updateStudentDetails(students.value[0])
-//             }
-//         }
+                updateStudentDetails(students.value[0])
+            }
+        }
 
-//     } catch (error) {
+    } catch (error) {
 
-//         console.error('Student API Error:', error)
-//     }
-// }
+        console.error('Student API Error:', error)
+    }
+}
 
 /* ----------------------------------
    UPDATE STUDENT DETAILS
@@ -533,101 +533,101 @@ const handleStudentChange = () => {
 /* ----------------------------------
    FETCH FEE SUMMARY
 ---------------------------------- */
-// const fetchFeeSummary = async () => {
+const fetchFeeSummary = async () => {
 
-//     try {
+    try {
 
-//         const res = await fetch(
-//             `/api/method/frappe.desk.reportview.get?doctype=Sales Invoice&fields=${encodeURIComponent(
-//                 JSON.stringify([
-//                     'grand_total',
-//                     'outstanding_amount',
-//                     'status',
-//                     'creation',
-//                 ])
-//             )}&limit_page_length=1000`
-//         )
+        const res = await fetch(
+            `/api/method/frappe.desk.reportview.get?doctype=Sales Invoice&fields=${encodeURIComponent(
+                JSON.stringify([
+                    'grand_total',
+                    'outstanding_amount',
+                    'status',
+                    'creation',
+                ])
+            )}&limit_page_length=1000`
+        )
 
-//         const data = await res.json()
+        const data = await res.json()
 
-//         const monthMap = {
-//             January: { total: 0, paid: 0, due: 0 },
-//             February: { total: 0, paid: 0, due: 0 },
-//             March: { total: 0, paid: 0, due: 0 },
-//             April: { total: 0, paid: 0, due: 0 },
-//             May: { total: 0, paid: 0, due: 0 },
-//             June: { total: 0, paid: 0, due: 0 },
-//         }
+        const monthMap = {
+            January: { total: 0, paid: 0, due: 0 },
+            February: { total: 0, paid: 0, due: 0 },
+            March: { total: 0, paid: 0, due: 0 },
+            April: { total: 0, paid: 0, due: 0 },
+            May: { total: 0, paid: 0, due: 0 },
+            June: { total: 0, paid: 0, due: 0 },
+        }
 
-//         let total = 0
-//         let paid = 0
-//         let due = 0
+        let total = 0
+        let paid = 0
+        let due = 0
 
-//         if (data.message?.values) {
+        if (data.message?.values) {
 
-//             data.message.values.forEach((row) => {
+            data.message.values.forEach((row) => {
 
-//                 const grandTotal = Number(row[0]) || 0
-//                 const outstanding = Number(row[1]) || 0
-//                 const status = row[2]
-//                 const creation = row[3]
+                const grandTotal = Number(row[0]) || 0
+                const outstanding = Number(row[1]) || 0
+                const status = row[2]
+                const creation = row[3]
 
-//                 const month = new Date(
-//                     creation
-//                 ).toLocaleString('default', {
-//                     month: 'long',
-//                 })
+                const month = new Date(
+                    creation
+                ).toLocaleString('default', {
+                    month: 'long',
+                })
 
-//                 if (monthMap[month]) {
+                if (monthMap[month]) {
 
-//                     monthMap[month].total += grandTotal
+                    monthMap[month].total += grandTotal
 
-//                     if (status === 'Paid') {
-//                         monthMap[month].paid += grandTotal
-//                     }
+                    if (status === 'Paid') {
+                        monthMap[month].paid += grandTotal
+                    }
 
-//                     monthMap[month].due += outstanding
-//                 }
+                    monthMap[month].due += outstanding
+                }
 
-//                 total += grandTotal
+                total += grandTotal
 
-//                 if (status === 'Paid') {
-//                     paid += grandTotal
-//                 }
+                if (status === 'Paid') {
+                    paid += grandTotal
+                }
 
-//                 due += outstanding
-//             })
-//         }
+                due += outstanding
+            })
+        }
 
-//         feeDetails.value = Object.keys(monthMap).map(
-//             (month) => ({
-//                 month,
-//                 total: monthMap[month].total.toLocaleString(
-//                     'en-IN'
-//                 ),
-//                 paid: monthMap[month].paid.toLocaleString(
-//                     'en-IN'
-//                 ),
-//                 due: monthMap[month].due.toLocaleString(
-//                     'en-IN'
-//                 ),
-//             })
-//         )
+        feeDetails.value = Object.keys(monthMap).map(
+            (month) => ({
+                month,
+                total: monthMap[month].total.toLocaleString(
+                    'en-IN'
+                ),
+                paid: monthMap[month].paid.toLocaleString(
+                    'en-IN'
+                ),
+                due: monthMap[month].due.toLocaleString(
+                    'en-IN'
+                ),
+            })
+        )
 
-//         totalFee.value =
-//             total.toLocaleString('en-IN')
+        totalFee.value =
+            total.toLocaleString('en-IN')
 
-//         paidFee.value =
-//             paid.toLocaleString('en-IN')
+        paidFee.value =
+            paid.toLocaleString('en-IN')
 
-//         dueFee.value =
-//             due.toLocaleString('en-IN')
+        dueFee.value =
+            due.toLocaleString('en-IN')
 
-//     } catch (error) {
+    } catch (error) {
 
-//         console.error('Fee API Error:', error)
-//     }
-// }
+        console.error('Fee API Error:', error)
+    }
+}
 
 /* ----------------------------------
    NOTIFICATIONS
