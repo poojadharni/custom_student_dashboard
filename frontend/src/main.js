@@ -15,6 +15,8 @@ import {
   resourcesPlugin,
 } from 'frappe-ui'
 
+import VueApexCharts from 'vue3-apexcharts' // <-- Add this
+
 // create a pinia instance
 let pinia = createPinia()
 
@@ -25,13 +27,13 @@ setConfig('resourceFetcher', frappeRequest)
 app.use(pinia)
 app.use(router)
 app.use(resourcesPlugin)
-
+app.use(VueApexCharts) // <-- Add this
 
 app.component('Button', Button)
 app.component('Card', Card)
 app.component('Input', Input)
+app.component('apexchart', VueApexCharts) // <-- Add this
 
 router.isReady().then(() => {
 	app.mount("#app")
 })
-
