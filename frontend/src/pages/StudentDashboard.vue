@@ -1,31 +1,5 @@
 <template>
     <div class="min-h-screen bg-[#f5f7fb] p-2 md:p-4">
-
-        <!-- HEADER -->
-        <div
-            class="bg-white border border-gray-200 rounded-xl px-4 py-3 flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-3 shadow-sm">
-
-            <div class="flex items-center gap-3">
-
-                <h1 class="text-base md:text-lg font-semibold text-gray-800">
-                    Student Profile Dashboard
-                </h1>
-
-            </div>
-
-            <div class="flex items-center gap-3 text-[11px] md:text-xs text-gray-500 flex-wrap">
-                <span>Live Dashboard</span>
-
-                <button class="text-base">
-                    ↻
-                </button>
-
-                <button class="text-base">
-                    ⋯
-                </button>
-            </div>
-        </div>
-
         <!-- TOP SECTION -->
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-3 mb-3">
 
@@ -461,31 +435,31 @@ const dueFee = ref(0)
 /* ----------------------------------
    FETCH STUDENTS
 ---------------------------------- */
-// const fetchStudents = async () => {
-//     try {
-//         const res = await fetch(
-//             '/api/method/education_dashboard.api.student.get_recent_students'
-//         )
+const fetchStudents = async () => {
+    try {
+        const res = await fetch(
+            '/api/method/education_dashboard.api.student.get_recent_students'
+        )
 
-//         const data = await res.json()
+        const data = await res.json()
 
-//         if (data.message?.status === 'success') {
+        if (data.message?.status === 'success') {
 
-//             students.value = data.message.data
+            students.value = data.message.data
 
-//             if (students.value.length > 0) {
+            if (students.value.length > 0) {
 
-//                 selectedStudent.value = students.value[0].name
+                selectedStudent.value = students.value[0].name
 
-//                 updateStudentDetails(students.value[0])
-//             }
-//         }
+                updateStudentDetails(students.value[0])
+            }
+        }
 
-//     } catch (error) {
+    } catch (error) {
 
-//         console.error('Student API Error:', error)
-//     }
-// }
+        console.error('Student API Error:', error)
+    }
+}
 
 /* ----------------------------------
    UPDATE STUDENT DETAILS
