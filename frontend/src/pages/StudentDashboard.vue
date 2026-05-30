@@ -7,12 +7,6 @@
 
             <div class="flex items-center gap-3">
 
-                <!-- BACK BUTTON -->
-                <button @click="goBack" class="bg-gray-100 hover:bg-gray-200 transition px-3 py-2 rounded-lg text-sm">
-
-                    ← Back
-                </button>
-
                 <h1 class="text-base md:text-lg font-semibold text-gray-800">
                     Student Profile Dashboard
                 </h1>
@@ -427,13 +421,6 @@
 import { ref, onMounted } from 'vue'
 
 /* ----------------------------------
-   BACK BUTTON
----------------------------------- */
-const goBack = () => {
-    window.history.back()
-}
-
-/* ----------------------------------
    STUDENT DROPDOWN
 ---------------------------------- */
 const students = ref([])
@@ -474,31 +461,31 @@ const dueFee = ref(0)
 /* ----------------------------------
    FETCH STUDENTS
 ---------------------------------- */
-const fetchStudents = async () => {
-    try {
-        const res = await fetch(
-            '/api/method/education_dashboard.api.student.get_recent_students'
-        )
+// const fetchStudents = async () => {
+//     try {
+//         const res = await fetch(
+//             '/api/method/education_dashboard.api.student.get_recent_students'
+//         )
 
-        const data = await res.json()
+//         const data = await res.json()
 
-        if (data.message?.status === 'success') {
+//         if (data.message?.status === 'success') {
 
-            students.value = data.message.data
+//             students.value = data.message.data
 
-            if (students.value.length > 0) {
+//             if (students.value.length > 0) {
 
-                selectedStudent.value = students.value[0].name
+//                 selectedStudent.value = students.value[0].name
 
-                updateStudentDetails(students.value[0])
-            }
-        }
+//                 updateStudentDetails(students.value[0])
+//             }
+//         }
 
-    } catch (error) {
+//     } catch (error) {
 
-        console.error('Student API Error:', error)
-    }
-}
+//         console.error('Student API Error:', error)
+//     }
+// }
 
 /* ----------------------------------
    UPDATE STUDENT DETAILS
