@@ -5,27 +5,14 @@
 
             <!-- LEFT PROFILE -->
             <div class="xl:col-span-2 bg-white border rounded-xl p-3 shadow-sm">
-
                 <label class="text-xs font-semibold text-gray-700 block mb-2">
-                    Student Name
+                    {{ studentData.student_name || 'Student Profile' }}
                 </label>
-
-                <!-- DROPDOWN -->
-                <select v-model="selectedStudent" @change="handleStudentChange"
-                    class="w-full border border-gray-300 rounded-lg text-xs px-2 py-2 mb-3">
-
-                    <option v-for="student in students" :key="student.name" :value="student.name">
-
-                        {{ student.student_name }}
-
-                    </option>
-
-                </select>
-
                 <!-- STUDENT IMAGE -->
-                <img src="https://images.unsplash.com/photo-1619895862022-09114b41f16f?q=80&w=1200&auto=format&fit=crop"
-                    class="w-full h-[220px] sm:h-[280px] xl:h-[180px] object-cover rounded-xl border" />
-
+                <img :src="studentData.image
+                    ? studentData.image
+                    : 'https://images.unsplash.com/photo-1619895862022-09114b41f16f?q=80&w=1200&auto=format&fit=crop'
+                    " class="w-full h-[220px] sm:h-[280px] xl:h-[180px] object-cover rounded-xl border" />
             </div>
 
             <!-- STUDENT DETAILS -->
@@ -435,29 +422,78 @@ const dueFee = ref(0)
 /* ----------------------------------
    FETCH STUDENTS
 ---------------------------------- */
-const fetchStudents = async () => {
+/* ----------------------------------
+   FETCH LOGGED IN STUDENT
+---------------------------------- */
+const fetchStudentInfo = async () => {
     try {
+
         const res = await fetch(
-            '/api/method/education_dashboard.api.student.get_recent_students'
+            '/api/method/education.education.api.get_student_info'
         )
 
         const data = await res.json()
 
-        if (data.message?.status === 'success') {
+        console.log('Student Data:', data)
 
-            students.value = data.message.data
+        const student = data.message || {}
 
-            if (students.value.length > 0) {
+        studentData.value = student
 
-                selectedStudent.value = students.value[0].name
-
-                updateStudentDetails(students.value[0])
-            }
-        }
+        details.value = [
+            {
+                label: 'Student ID',
+                value:
+                    student.student ||
+                    student.name ||
+                    '-',
+            },
+            {
+                label: 'Full Name',
+                value:
+                    student.student_name ||
+                    '-',
+            },
+            {
+                label: 'Grade',
+                value:
+                    student.program ||
+                    student.course ||
+                    '-',
+            },
+            {
+                label: 'Age',
+                value:
+                    student.age ||
+                    '-',
+            },
+            {
+                label: 'Gender',
+                value:
+                    student.gender ||
+                    '-',
+            },
+            {
+                label: 'Nationality',
+                value:
+                    student.nationality ||
+                    'Indian',
+            },
+            {
+                label: 'Email Address',
+                value:
+                    student.student_email_id ||
+                    student.email ||
+                    '-',
+            },
+        ]
 
     } catch (error) {
 
-        console.error('Student API Error:', error)
+        console.error(
+            'Student Info Error:',
+            error
+        )
     }
 }
 
@@ -755,7 +791,7 @@ const gradeChartOptions = {
 ---------------------------------- */
 onMounted(async () => {
 
-    await fetchStudents()
+    await fetchStudentInfo()
 
     await fetchFeeSummary()
 })
